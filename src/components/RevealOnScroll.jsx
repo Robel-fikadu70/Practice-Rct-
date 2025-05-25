@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const RevealOnScroll = ({ children }) => {
   const ref = useRef(null);
@@ -7,13 +7,13 @@ export const RevealOnScroll = ({ children }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          ref.Current.add("visible");
+          ref.current.classList.add("visible");
         }
       },
       { threshold: 0.2, rootMargin: "0px 0px -50px 0px" }
     );
 
-    if (ref.Current) observer.observe(ref.current);
+    if (ref.current) observer.observe(ref.current);
 
     return () => observer.disconnect();
   });
